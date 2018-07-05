@@ -1,0 +1,90 @@
+.content-header .button-redirect {
+  float: right;
+  margin-right: 20px;
+  background: #6c757d;
+  border: 1px solid #6c757d;
+  color: #fff;
+  padding: 3px 7px;
+  border-radius: 2px; }
+
+.content .box {
+  padding-top: 20px;
+  padding-left: 10px; }
+.content .box-footer .button_save {
+  color: #fff;
+  background-color: #c82333;
+  border: 1px solid #c82333;
+  border-radius: 2px; }
+.content .box-footer .button_undo {
+  padding: 3px 8px;
+  background: #6c757d;
+  color: #fff;
+  margin-left: 10px;
+  border: 1px solid #6c757d;
+  border-radius: 2px; }
+
+.form-item {
+  height: 70px; }
+  .form-item .input {
+    width: 400px;
+    padding: 3px 10px; }
+  .form-item .input_radio {
+    position: relative;
+    top: 2px;
+    margin-left: 15px; }
+  .form-item .show_error {
+    font-size: 12px;
+    color: red; }
+
+input:focus, button:focus, select:focus {
+  outline: none; }
+
+.button_primary {
+  color: #fff;
+  background-color: #3c8dbc;
+  border: 1px solid #3c8dbc;
+  border-radius: 2px; }
+
+.input_search {
+  width: 250px;
+  margin-right: 10px;
+  padding: 5px; }
+
+.button_edit {
+  padding: 0 5px; }
+  .button_edit:hover {
+    color: #fff;
+    cursor: pointer; }
+
+.button_danger {
+  color: #fff;
+  background-color: #c82333;
+  border: 1px solid #c82333;
+  border-radius: 2px; }
+
+/*superadmin.home*/
+.content .box .search-filter {
+  padding-bottom: 25px;
+  display: inline-flex; }
+  .content .box .search-filter select[name="filter"] {
+    outline: none;
+    margin-right: 10px; }
+.content .box .table_list_admins {
+  border-bottom: 1px solid #f5f3f3; }
+  .content .box .table_list_admins .tr_head {
+    background: #ccc; }
+  .content .box .table_list_admins .tr {
+    border-top: 1px solid #f5f3f3; }
+    .content .box .table_list_admins .tr:hover {
+      background: #f5f3f3; }
+.content .box .paginate_page {
+  padding: 0 10px; }
+  .content .box .paginate_page .dataTables_info {
+    float: left;
+    position: relative;
+    padding: 20px 10px 10px 10px; }
+  .content .box .paginate_page .pagination {
+    margin: 0;
+    float: right; }
+
+/*# sourceMappingURL=inc_custorm.css.map */

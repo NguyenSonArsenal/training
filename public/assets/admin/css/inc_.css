@@ -1,0 +1,35 @@
+.wrapper .main-sidebar .sidebar .sidebar-menu .menu-active {
+  background: #1e282c;
+}
+
+.box-header .search-filter {
+  display: inline-flex;
+}
+.box-header .search-filter .advance_filter {
+  position: relative;
+  top: 6px;
+}
+.box-header .search-filter .advance_filter > a:hover {
+  color: #f66f00;
+}
+.box-header .search-filter .marginRight {
+  margin-right: 5px;
+}
+
+.side_bar_active {
+  background: #1e282c;
+}
+
+small.colorRed {
+  color: red;
+}
+
+small.colorGreen {
+  color: red;
+}
+
+.active_show_home {
+  margin-bottom: 10px;
+}
+
+/*# sourceMappingURL=inc_.css.map */

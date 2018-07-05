@@ -1,0 +1,69 @@
+.wrapper {
+    margin: auto;
+    margin-top: 20px;
+    width:35%;
+    border: 1px solid green;
+    padding: 5px;
+    -webkit-box-shadow: 0px 0px 15px 0px #D6D6D6;
+    font-size: 14px;
+    height: auto;
+    .login {
+        padding: 20px;
+        .form_login {
+            >h3 {
+                color: #029241;
+                font-size: 2.5em;
+                text-align: center;
+                margin-bottom: 20px;
+            }
+            .error_login {
+                margin-bottom: 10px;
+                .show_error_login {
+                    color: red;
+                    font-size: 20px;
+                }
+            }
+            .form {
+                .form-group {
+                    margin-bottom: 20px;
+                    .control-label {
+                        text-align: right;
+                        display: inline-block;
+                    }
+                    .txt_error_validate {
+                        color: red;
+                    }
+                    .btnLogin {
+                        background: #fdb515;
+                        color: #FFFFFF;
+                        text-align: center;
+                        padding: 10px 0;
+                        border: none;
+                        font-size: 15px;
+                        outline: none;
+                        width: 32%;
+                        cursor: pointer;
+                        margin-bottom: 30px;
+                        &:hover {
+                            background: #029241;
+                            transition: 0.5s all;
+                            -webkit-transition: 0.5s all;
+                            -moz-transition: 0.5s all;
+                            -o-transition: 0.5s all;
+                            -ms-transition: 0.5s all;
+                        }
+                    }
+                }
+            }
+        }
+        .add_infor {
+            > a {
+                color: #029241;
+                text-decoration: none;
+                &:hover {
+                    color: #fdb515;
+                }
+            }
+        }
+    }
+}
