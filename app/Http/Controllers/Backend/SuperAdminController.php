@@ -6,35 +6,24 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\AdminCreateRequest;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
+use App\Repositories\AdminRepository;
 
 class SuperAdminController extends Controller
 {
+    protected $_repository = '';
+
+    public function __construct(AdminRepository $adminRepository)
+    {
+        parent::__construct();
+        $this->_repository = $adminRepository;
+    }
+
     public function index(Request $request)
     {
-        $admins = Admin::orderBy('id', 'desc');
-
-        $search = array_get($request->all(), 'search');
-        $filter = intval(array_get($request->all(), 'filter'));
-
-        if ($search)
-        {
-            $admins->where('id', intval($search))
-                    ->orWhere('name', 'LIKE', "%$search%")
-                    ->orWhere('email', 'LIKE', "%$search%");
-        }
-
-        if ($filter) {
-            if ($filter == config('settings.role_type.superadmin.id') || $filter == config('settings.role_type.admin.id')) {
-                $admins->where('role_type', $filter);
-            }
-        }
-
-        $admins = $admins->paginate(config('settings.limit.default'));
+        $listAdmins = $this->_repository->getListAdmins();
 
         $viewDatas = [
-            'admins' => $admins
+            'admins' => $listAdmins
         ];
 
         return view('backend.superadmin.admin.index')->with($viewDatas);

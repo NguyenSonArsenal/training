@@ -16,16 +16,12 @@ if (count($admins) > 0)
 @section('content')
     <section class="content-header">
         <h1 class="pull-left">List admin</h1>
-
         <a type="button" class="button-redirect" href="{{ route('superadmin.create.admin.get') }}">
             <i class="fa fa-plus" aria-hidden="true"></i>
             Add admin
         </a>
-
         <div class="clearfix"></div>
-
         @include('include.admin.inc_admin_alert_info')
-
     </section>
 
     <section class="content">
