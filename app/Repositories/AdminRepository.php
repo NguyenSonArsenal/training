@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Repositories\Base\CustomRepository;
-
+use App\Model\Entities\Admin;
 /**
  * Class KeywordRepository
  * @package App\Repositories
@@ -28,7 +28,7 @@ class AdminRepository extends CustomRepository
 
     public function getListAdmins()
     {
-        dd('die at admin repo');
+        dd(Admin::all());
     }
 
 }

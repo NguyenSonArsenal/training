@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Repositories\Base;
+use Prettus\Repository\Eloquent\BaseRepository;
 
-abstract class CustomRepository
+abstract class CustomRepository extends BaseRepository
 {
     protected $_sortField = 'id';
     protected $_sortType = 'DESC';
