@@ -28,7 +28,8 @@ class AdminRepository extends CustomRepository
 
     public function getListAdmins()
     {
-        dd(Admin::all());
+        $data = $this->model->paginate(5);
+        return $data;
     }
 
 }

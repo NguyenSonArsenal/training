@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Validators;
+use \Prettus\Validator\LaravelValidator;
 
-class Admin
+class Admin extends LaravelValidator
 {
 
 }
