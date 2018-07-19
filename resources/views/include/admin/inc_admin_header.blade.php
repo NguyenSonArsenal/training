@@ -1,3 +1,5 @@
+<?php dd(Auth::guard('admins')->user()->isAdmin()); ?>
+
 <header class="main-header">
     <!-- Logo -->
     <a href="#" class="logo">
@@ -24,13 +26,9 @@
                         <!-- User image -->
                         <li class="user-header">
                             <img src="<?=asset('assets/admin/images/user3-128x128.jpg')?>" class="img-circle" alt="User Image">
-
                             <p>
                                 {{ Auth::guard('admins')->user()->name }}
-
                                 <small>{{ Auth::guard('admins')->user()->role_type == config('settings.role_type.superadmin') ? "super admin" : "admin" }}</small>
-
-
                             </p>
                         </li>
                         <!-- Menu Footer-->

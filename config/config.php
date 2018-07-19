@@ -9,5 +9,7 @@ return [
         'super' => 1,
         'admin' => 2
     ],
-    'test' => 1
+    'test' => 1,
+    // guard
+    'backend_guard' => 'admins'
 ];

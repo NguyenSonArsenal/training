@@ -97,12 +97,10 @@ if (count($admins) > 0)
                             </td>
                             <td>
                                 Đã tạo:<br>
-                                {{--{{ $admin->ins_datetime->format('H:m:s d-m-Y') }}--}}
-                                {{--<small>({{ $admin->ins_datetime->diffForHumans() }})</small>--}}
+                                <small>{{ $admin->getCreatedAtValue() }}</small>
                                 <br>
                                 Lần cập nhật cuối:
-                                {{--<br>{{ $admin->upd_datetime->format('H:i:s d-m-Y') }}--}}
-                                {{--<small>({{ $admin->upd_datetime->diffForHumans() }})</small>--}}
+                                <small>{{ $admin->getUpdatedAtValue() }}</small>
                             </td>
                             <td style="display: inline-flex">
                                 @if ($admin->role_type == config('settings.role_type.admin.id'))

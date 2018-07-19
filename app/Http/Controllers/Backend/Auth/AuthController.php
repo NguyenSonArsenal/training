@@ -20,16 +20,18 @@ class AuthController extends Controller
             'email'     => array_get($listRequest, 'email'),
             'password'  => array_get($listRequest, 'password'),
         ];
-
-        if (Auth::guard('admins')->attempt($requestLoginAdmin))
+        if (backendGuard()->attempt($requestLoginAdmin))
         {
-            $admin = Auth::guard('admins')->user();
+            $admin = backendGuard()->user();
 
-            if ($admin->role_type == config('settings.role_type.superadmin.id', 1))
+            //dd('Đang lỗi ở authcontroller, tại sao đã có đối tượng $admin oy,
+            // mà lại không tồn tại phương thức của presenter là isSuperadmin và isAdmin');
+
+            if ($admin->isSuperAdmin())
             {
                 return redirect()->route('superadmin.home');
             }
-            else if ($admin->role_type == config('settings.role_type.admin.id', 2))
+            else if ($admin->isAdmin())
             {
                 return redirect()->route('admin.home');
             }
