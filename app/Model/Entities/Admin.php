@@ -2,18 +2,16 @@
 
 namespace App\Model\Entities;
 use App\Model\Presenters\AdminPresenters;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Model\Base\AuthLaravel;
 
-class Admin extends Authenticatable
+class Admin extends AuthLaravel
 {
     use AdminPresenters;
 
     protected $_table = 'admins';
     protected $_alias = 'admins';
     protected $_primaryKey = 'id';
-
     protected $fillable = [
         'name', 'email', 'password', 'avatar', 'role_type','ins_id', 'upd_id', 'ins_datetime', 'upd_datetime', 'del_flag'
     ];
-
 }

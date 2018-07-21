@@ -73,13 +73,13 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\User::class,
+            //'model' => App\User::class,
         ],
 
         // For admins
         'admins'    => [
             'driver'    => 'eloquent',
-            'model' => App\Model\Admin::class,
+            'model' => App\Model\Entities\Admin::class,
         ],
 
         // 'users' => [

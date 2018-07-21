@@ -49,6 +49,20 @@ if (!function_exists('getUpdatedAtColumn')) {
     }
 }
 
+if (!function_exists('getDeletedAtColumn')) {
+    function getDeletedAtColumn($key = 'field')
+    {
+        return getSystemConfig('deleted_at_column.' . $key);
+    }
+}
+
+if (!function_exists('getDelFlagColumn')) {
+    function getDelFlagColumn($key = 'field')
+    {
+        return getSystemConfig('del_flag_column.' .$key);
+    }
+}
+
 // guard
 if (!function_exists('backendGuard')) {
 

@@ -8,5 +8,7 @@
 
 return [
     'SUPER_ADMIN_TYPE' => 1,
-    'ADMIN_TYPE' => 2
+    'SUPER_ADMIN_ALIAS' => 'Super Admin',
+    'ADMIN_TYPE' => 2,
+    'ADMIN_ALIAS' => 'Admin'
 ];
