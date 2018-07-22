@@ -15,10 +15,10 @@ class AdminCreateRequest extends FormRequest
     public function rules(Request $request)
     {
         $rules = [
-            'name'          =>  'bail|required',
-            'email'         =>  'bail|required|email|max:128|unique:admins,email,' . $request->id,
-            'password'      =>  'bail|required|max:64',
-            'new_password'  =>  'bail|confirmed|max:64',
+            'name' =>  'bail|required',
+            'email' =>  'bail|required|email|max:128|unique:admins,email,' . $request->id,
+            'password' =>  'bail|required|confirmed|max:64',
+            'avatar' => 'bail|required|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
 
         // updating

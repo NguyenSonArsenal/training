@@ -32,46 +32,68 @@ $activeSidebar = 'admin_page';
                       method="post" action="{{ route('superadmin.store.admin') }}">
 
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-item">
+                                <label for="" class="label_item">Name<small class="colorRed">(*)</small></label><br>
+                                <input class="input" type="text" name="name" value="{{ old('name') }}"><br>
+                                @if ($errors->has('name'))
+                                    <span class="show_error">{{ $errors->first('name') }}</span>
+                                @endif
+                            </div><br>
+
+                            <div class="form-item">
+                                <label for="" class="label_item">Email<small class="colorRed">(*)</small></label><br>
+                                <input class="input" type="email" name="email" value="{{ old('email') }}"><br>
+                                @if ($errors->has('email'))
+                                    <span class="show_error">{{ $errors->first('email') }}</span>
+                                @endif
+                            </div><br>
+
+                            <div class="form-item">
+                                <label for="" class="label_item">Password<small class="colorRed">(*)</small></label><br>
+                                <input class="input" type="password" name="password" value="{{ old('password') }}"><br>
+                                @if ($errors->has('password'))
+                                    <span class="show_error">{{ $errors->first('password') }}</span>
+                                @endif
+                            </div><br>
+
+                            <div class="form-item">
+                                <label for="" class="label_item">Confirm Password<small class="colorRed">(*)</small></label><br>
+                                <input class="input" type="password" name="password_confirmation">
+                                @if ($errors->has('password_confirmation'))
+                                    <span class="show_error">{{ $errors->first('password_confirmation') }}</span>
+                                @endif
+                            </div><br>
+
+                            <div class="form-item">
+                                <label for="" class="label_item">Role<small class="colorRed">(*)</small></label>
+                                <input type="radio" class="input_radio" name="role_type"
+                                       value={{ config('settings.role_type.admin.id') }} checked
+                                        {{ old('role_type') == config('settings.role_type.admin.id') ? "checked" : "" }}
+                                >
+                                Admin
+                                <input type="radio" class="input_radio" name="role_type"
+                                       value={{ config('settings.role_type.superadmin.id') }}
+                                        {{ old('role_type') == config('settings.role_type.superadmin.id') ? "checked" : "" }}
+                                >
+                                SuperAdmin
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-item">
+                                <label for="" class="label_item">Avatar</label>
+                                <input type="file" name="image" onchange="readURL(this);">
+                                @if ($errors->has('avatar'))
+                                    <span class="show_error" id="avatar_error">{{ $errors->first('avatar') }}</span>
+                                @endif
+                            </div>
+                            <img style="width: 200px; height: 200px; position:relative; border: 1px solid #ccc"
+                                 src="{{ asset('assets/admin/images/default.png') }}"  alt="default image" id="imgPreview" />
+                        </div>
+                    </div>
                     
-                    <div class="form-item">
-                        <label for="" class="label_item">Name<small class="colorRed">(*)</small></label><br>
-                        <input class="input" type="text" name="name" value="{{ old('name') }}">
-                        @if ($errors->has('name'))
-                            <span class="show_error">{{ $errors->first('name') }}</span>
-                        @endif
-                    </div>
-
-                    <div class="form-item">
-                        <label for="" class="label_item">Email<small class="colorRed">(*)</small></label><br>
-                        <input class="input" type="email" name="email" value="{{ old('email') }}">
-                        @if ($errors->has('email'))
-                            <span class="show_error">{{ $errors->first('email') }}</span>
-                        @endif
-                    </div>
-
-                    <div class="form-item">
-                        <label for="" class="label_item">Password<small class="colorRed">(*)</small></label><br>
-                        <input class="input" type="password" name="password">
-                        @if ($errors->has('password'))
-                            <span class="show_error">{{ $errors->first('password') }}</span>
-                        @endif
-                    </div>
-
-                    <div class="form-item">
-                        <label for="" class="label_item">Role<small class="colorRed">(*)</small></label>
-                        <input type="radio" class="input_radio" name="role_type"
-                               value={{ config('settings.role_type.admin.id') }} checked
-                               {{ old('role_type') == config('settings.role_type.admin.id') ? "checked" : "" }}
-                        >
-                        Admin
-
-                        <input type="radio" class="input_radio" name="role_type"
-                               value={{ config('settings.role_type.superadmin.id') }}
-                                {{ old('role_type') == config('settings.role_type.superadmin.id') ? "checked" : "" }}
-                        >
-                        SuperAdmin
-                    </div>
-
                     <div class="box-footer">
                         <button type="submit" class="button_save">
                             <i class="fa fa-save" aria-hidden="true"></i>
@@ -85,17 +107,34 @@ $activeSidebar = 'admin_page';
                 </form>
             </div>
     </section>
-
-
 @endsection
 
 @section('script')
     <script>
+        function readURL(input) {
+            if (input.files && input.files[0])
+            {
+                var fileName = input.files[0].name;
+                var extension = fileName.split('.').pop();
+                var extensionInvalid = ['png', 'jpg', 'gif', "jpeg"];
+
+                if (extensionInvalid.includes(extension))
+                {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        $('#imgPreview').attr('src', e.target.result);
+                    };
+                    reader.readAsDataURL(input.files[0]);
+                }
+                else
+                {
+                    $("#avatar_error").text('Please choose only images');
+                }
+            }
+        }
+
         $(document).ready(function () {
-            // $('#toggleActiveAdmin').click(function () {
-            //     var isActive = $('#inputActiveAdmin').prop('checked') ? 0 : 1;
-            //     $('#inputActiveAdmin').val(isActive);
-            // });
         })
     </script>
 @endsection

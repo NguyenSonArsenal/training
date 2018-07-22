@@ -3,12 +3,12 @@ namespace App\Http\Controllers\Backend;
 
 use App\Model\Admin;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Base\BaseController;
 use App\Http\Requests\Backend\AdminCreateRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\AdminRepository;
 
-class SuperAdminController extends Controller
+class SuperAdminController extends BaseController
 {
     protected $_repository = '';
 
