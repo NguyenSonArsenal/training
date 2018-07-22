@@ -14,4 +14,22 @@ class Admin extends AuthLaravel
     protected $fillable = [
         'name', 'email', 'password', 'avatar', 'role_type','ins_id', 'upd_id', 'ins_datetime', 'upd_datetime', 'del_flag'
     ];
+
+    // Accessor
+    public function getNameAttribute($name)
+    {
+        return ucwords($name);
+    }
+
+    // Mutator
+    public function setNameAttribute($name)
+    {
+        $this->attributes['name'] = strtolower($name);
+    }
+
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = bcrypt($value);
+    }
+
 }
