@@ -14,18 +14,21 @@ class AdminCreateRequest extends FormRequest
 
     public function rules(Request $request)
     {
-        $rules = [
+        $params = $request->all();
+        $image = array_get($params, 'image', null);
+
+        $rules = [];
+        if ($image != null) {
+            $rules += ['image' => 'bail|required|mimes:jpeg,png,jpg,gif,svg|max:2048'];
+            doUploadToFoderTmp($image);
+        }
+
+        $rules += [
             'name' =>  'bail|required',
             'email' =>  'bail|required|email|max:128|unique:admins,email,' . $request->id,
             'password' =>  'bail|required|confirmed|max:64',
-            'avatar' => 'bail|required|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'bail|required|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ];
-
-        // updating
-        if ($request->id) {
-            $rules['password'] = 'bail|max:64';
-        }
-
         return $rules;
     }
 }

@@ -85,12 +85,20 @@ $activeSidebar = 'admin_page';
                             <div class="form-item">
                                 <label for="" class="label_item">Avatar</label>
                                 <input type="file" name="image" onchange="readURL(this);">
-                                @if ($errors->has('avatar'))
-                                    <span class="show_error" id="avatar_error">{{ $errors->first('avatar') }}</span>
+                                @if ($errors->has('image'))
+                                    <span class="show_error" id="avatar_error">{{ $errors->first('image') }}</span>
                                 @endif
                             </div>
-                            <img style="width: 200px; height: 200px; position:relative; border: 1px solid #ccc"
+
+                            <?php var_dump(session()->has('image')); ?>
+
+                            @if(!session()->has('image'))
+                                <img style="width: 200px; height: 200px; position:relative; border: 1px solid #ccc"
                                  src="{{ asset('assets/admin/images/default.png') }}"  alt="default image" id="imgPreview" />
+                            @else
+                                <img style="width: 200px; height: 200px; position:relative; border: 1px solid #ccc"
+                                 src="{{ asset('tmp_uploads/2018-7-23/1532304076_test.jpg') }}"  alt="name image" id="imgPreview" />
+                            @endif
                         </div>
                     </div>
                     

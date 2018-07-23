@@ -11,5 +11,7 @@ return [
     ],
     'test' => 1,
     // guard
-    'backend_guard' => 'admins'
+    'backend_guard' => 'admins',
+    // config #
+    'tmp_upload_dir' => 'tmp_uploads',
 ];

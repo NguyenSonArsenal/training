@@ -34,6 +34,9 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
+        if ($exception instanceof \Illuminate\Http\Exceptions\PostTooLargeException) {
+            redirect()->back();
+        }
         parent::report($exception);
     }
 

@@ -29,8 +29,9 @@
             "App\\": "app/"
         },
         "files": [
+            "app/Helper/Common.php",
             "app/Helper/function.php",
-            "app/Helper/Common.php"
+            "app/Helper/Uploader.php"
         ]
     },
     "autoload-dev": {

@@ -80,7 +80,7 @@ if (count($admins) > 0)
                                     <img src="{{ $admin->avatar }}"
                                          height="40" width="40" alt="name image">
                                 @else
-                                    <img src="{{ asset('assets/admin/images/default-avatar.png') }}"
+                                    <img src="{{ asset('assets/admin/images/default.png') }}"
                                          height="40" width="40" alt="name image">
                                 @endif
                             </td>
