@@ -38,6 +38,8 @@ class SuperAdminController extends BaseController
     {
         $listRequest = $request->all();
 
+        dd($listRequest);
+
         $admin = Auth::guard('admins')->user();
 
         $listRequest['admin_ins_id'] = $admin->id;

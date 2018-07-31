@@ -5,18 +5,25 @@ use Carbon\Carbon;
 if (!function_exists('doUploadToFoderTmp')) {
     function doUploadToFoderTmp($file)
     {
-        createTmpUploadsFoder();
-        $location = getLocationTmpUpload($file);
-        if(move_uploaded_file($_FILES['image']['tmp_name'], $location)) {
-            return session(['image' => $location]);
+        define("DOC_ROOT", $_SERVER['DOCUMENT_ROOT']."/");
+        define("PDF_UPLOADS", DOC_ROOT."tmp_uploads/");
+
+        $tmp_name = $_FILES['image']['tmp_name'];
+        $name = $_FILES['image']['name'];
+
+        $fileName = 'tmp_uploads/foo.jpg';
+
+        if(Image::make($file)->resize(300, 200)->save($fileName)) {
+            return session()->put(['image' => $fileName]);
         }
+
         return false;
     }
 }
 
-// return tmp_uploads/2020-01-01/nameFile.extention
+// return tmp_uploads/2020-01-01/
 if(!function_exists('getTmpUploadDir')) {
-    function getTmpUploadDir($file = null)
+    function getTmpUploadDir()
     {
         $now = new Carbon();
         $year = $now->year;
@@ -31,7 +38,7 @@ if(!function_exists('getTmpUploadDir')) {
 if (!function_exists('getTmpUploadUrl')) {
     function getTmpUploadUrl($file = null)
     {
-        return public_path(getTmpUploadDir($file = null));
+        return public_path(getTmpUploadDir());
     }
 }
 
@@ -46,10 +53,16 @@ if (!function_exists('createTmpUploadsFoder')) {
     }
 }
 
+// return C:\xampp\htdocs\www\training\public\tmp_uploads\2018-7-30\fileName.png
 if (!function_exists('getLocationTmpUpload')) {
     function getLocationTmpUpload($file) {
-        $pathUploadtmp = getTmpUploadUrl();
-        $fileName = getTimeNow() . '_' . $file->getClientOriginalName();
-        return $pathUploadtmp . DIRECTORY_SEPARATOR . $fileName;
+        $fileName = getFileName($file);
+        return public_path($fileName);
+    }
+}
+
+if (!function_exists('getFileName')) {
+    function getFileName($file) {
+        return getTmpUploadDir() . DIRECTORY_SEPARATOR . getTimeNow() . '_' . $file->getClientOriginalName();
     }
 }

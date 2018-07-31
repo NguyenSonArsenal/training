@@ -1,5 +1,7 @@
 <?php
 $activeSidebar = 'admin_page';
+
+// dd(session()->get('image'));
 ?>
 
 @extends('layouts.admin')
@@ -90,14 +92,14 @@ $activeSidebar = 'admin_page';
                                 @endif
                             </div>
 
-                            <?php var_dump(session()->has('image')); ?>
+                            <?php //var_dump(session()->all()); ?>
 
                             @if(!session()->has('image'))
                                 <img style="width: 200px; height: 200px; position:relative; border: 1px solid #ccc"
                                  src="{{ asset('assets/admin/images/default.png') }}"  alt="default image" id="imgPreview" />
                             @else
                                 <img style="width: 200px; height: 200px; position:relative; border: 1px solid #ccc"
-                                 src="{{ asset('tmp_uploads/2018-7-23/1532304076_test.jpg') }}"  alt="name image" id="imgPreview" />
+                                 src="{{ asset(session()->get('image')) }}"  alt="name image" id="imgPreview" />
                             @endif
                         </div>
                     </div>

@@ -27,7 +27,7 @@ class AdminCreateRequest extends FormRequest
             'name' =>  'bail|required',
             'email' =>  'bail|required|email|max:128|unique:admins,email,' . $request->id,
             'password' =>  'bail|required|confirmed|max:64',
-            'image' => 'bail|required|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            //'image' => 'bail|required|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ];
         return $rules;
     }
