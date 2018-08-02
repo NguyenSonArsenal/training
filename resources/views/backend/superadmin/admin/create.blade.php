@@ -1,7 +1,5 @@
 <?php
 $activeSidebar = 'admin_page';
-
-// dd(session()->get('image'));
 ?>
 
 @extends('layouts.admin')
@@ -148,3 +146,9 @@ $activeSidebar = 'admin_page';
         })
     </script>
 @endsection
+
+<?php
+if (session()->has('image')) {
+    session()->forget('image');
+}
+?>

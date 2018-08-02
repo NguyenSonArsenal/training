@@ -37,13 +37,9 @@ class SuperAdminController extends BaseController
     public function store(AdminCreateRequest $request)
     {
         $listRequest = $request->all();
-
-        dd($listRequest);
-
-        $admin = Auth::guard('admins')->user();
-
-        $listRequest['admin_ins_id'] = $admin->id;
-        $listRequest['admin_ins_id'] = $admin->id;
+        createForderUpload();
+        $listRequest['admin_ins_id'] = currentAdmin()->id;
+        $listRequest['avatar'] = session()->get('image');
 
         Admin::create($listRequest);
 

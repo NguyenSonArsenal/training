@@ -13,5 +13,6 @@ return [
     // guard
     'backend_guard' => 'admins',
     // config #
-    'tmp_upload_dir' => 'tmp_uploads',
+    'tmp_upload_dir' => 'tmp_uploads/',
+    'upload_dir' => 'uploads/',
 ];

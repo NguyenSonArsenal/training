@@ -23,12 +23,6 @@ if (!function_exists('getKeysConfig')) {
 
 if (!function_exists('getSystemConfig')) {
 
-    /**
-     * @param $key
-     * @param null $default
-     * @param $flip
-     * @return mixed
-     */
     function getSystemConfig($key, $default = null, $flip = false)
     {
         return config('system.' . $key, $default, $flip);
@@ -73,5 +67,12 @@ if (!function_exists('backendGuard')) {
     function backendGuard($default = 'admins')
     {
         return Auth::guard(getSystemConfig('backend_guard', $default));
+    }
+}
+
+if (!function_exists('currentAdmin')) {
+    function currentAdmin()
+    {
+        return backendGuard()->user();
     }
 }

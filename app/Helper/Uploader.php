@@ -5,15 +5,9 @@ use Carbon\Carbon;
 if (!function_exists('doUploadToFoderTmp')) {
     function doUploadToFoderTmp($file)
     {
-        define("DOC_ROOT", $_SERVER['DOCUMENT_ROOT']."/");
-        define("PDF_UPLOADS", DOC_ROOT."tmp_uploads/");
+        $fileName = getConfig('tmp_upload_dir', 'tmp_uploads/') . $file->getClientOriginalName();
 
-        $tmp_name = $_FILES['image']['tmp_name'];
-        $name = $_FILES['image']['name'];
-
-        $fileName = 'tmp_uploads/foo.jpg';
-
-        if(Image::make($file)->resize(300, 200)->save($fileName)) {
+        if(Image::make($file)->save($fileName)) {
             return session()->put(['image' => $fileName]);
         }
 
@@ -22,15 +16,19 @@ if (!function_exists('doUploadToFoderTmp')) {
 }
 
 // return tmp_uploads/2020-01-01/
-if(!function_exists('getTmpUploadDir')) {
-    function getTmpUploadDir()
+if(!function_exists('createForderUpload')) {
+    function createForderUpload()
     {
         $now = new Carbon();
         $year = $now->year;
         $month = $now->month;
         $day = $now->day;
-        return getSystemConfig('tmp_upload_dir', 'tmp_uploads') . DIRECTORY_SEPARATOR .
-            $year . '-' . $month . '-' . $day;
+        $pathDir = getSystemConfig('upload_dir', 'uploads') . $year . '-' . $month . '-' . $day;
+        $fullPath = public_path($pathDir);
+        if (!file_exists($pathDir))
+        {
+            \File::makeDirectory($pathDir, $mode = 0777, true, true);
+        }
     }
 }
 
