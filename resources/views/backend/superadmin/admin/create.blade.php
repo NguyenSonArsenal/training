@@ -1,5 +1,7 @@
 <?php
 $activeSidebar = 'admin_page';
+
+$srcImage = session()->has('image') ? session()->get('image.pathImgTmp') : 'assets/admin/images/default.png';
 ?>
 
 @extends('layouts.admin')
@@ -90,15 +92,8 @@ $activeSidebar = 'admin_page';
                                 @endif
                             </div>
 
-                            <?php //var_dump(session()->all()); ?>
-
-                            @if(!session()->has('image'))
-                                <img style="width: 200px; height: 200px; position:relative; border: 1px solid #ccc"
-                                 src="{{ asset('assets/admin/images/default.png') }}"  alt="default image" id="imgPreview" />
-                            @else
-                                <img style="width: 200px; height: 200px; position:relative; border: 1px solid #ccc"
-                                 src="{{ asset(session()->get('image')) }}"  alt="name image" id="imgPreview" />
-                            @endif
+                            <img style="width: 200px; height: 200px; position:relative; border: 1px solid #ccc"
+                             src="{{ asset($srcImage) }}"  alt="name image" id="imgPreview" />
                         </div>
                     </div>
                     
@@ -146,9 +141,3 @@ $activeSidebar = 'admin_page';
         })
     </script>
 @endsection
-
-<?php
-if (session()->has('image')) {
-    session()->forget('image');
-}
-?>

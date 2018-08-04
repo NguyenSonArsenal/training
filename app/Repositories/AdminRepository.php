@@ -28,7 +28,7 @@ class AdminRepository extends CustomRepository
 
     public function getListAdmins()
     {
-        $data = $this->model->paginate(5);
+        $data = $this->model->orderBy('id', 'desc')->paginate(5);
         return $data;
     }
 

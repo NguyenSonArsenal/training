@@ -13,6 +13,11 @@ return [
     // guard
     'backend_guard' => 'admins',
     // config #
-    'tmp_upload_dir' => 'tmp_uploads/',
-    'upload_dir' => 'uploads/',
+    'tmp_upload_dir' => 'tmp_uploads' . DIRECTORY_SEPARATOR,
+    'upload_dir' => 'uploads' . DIRECTORY_SEPARATOR,
+
+    // notification
+    'create' => ['title' => 'success', 'message' => 'Created successfully'],
+    'update' => ['title' => 'success', 'message' => 'Updated successfully'],
+    'delete' => ['title' => 'success', 'message' => 'Deleted successfully'],
 ];

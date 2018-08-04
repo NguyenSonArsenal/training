@@ -76,3 +76,10 @@ if (!function_exists('currentAdmin')) {
         return backendGuard()->user();
     }
 }
+
+if (!function_exists('getExtention')) {
+    function getExtention($file) {
+        $file = explode('.', $file);
+        return $file[count($file) - 1];
+    }
+}

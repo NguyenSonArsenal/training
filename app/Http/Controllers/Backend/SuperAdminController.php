@@ -37,13 +37,24 @@ class SuperAdminController extends BaseController
     public function store(AdminCreateRequest $request)
     {
         $listRequest = $request->all();
-        createForderUpload();
-        $listRequest['admin_ins_id'] = currentAdmin()->id;
-        $listRequest['avatar'] = session()->get('image');
+        $destinationPath = doUpload();
+        if ($destinationPath) {
+            deleteFileTmp(public_path(session()->get('image.pathImgTmp')));
+        }
 
-        Admin::create($listRequest);
+        $listRequest['ins_id'] = currentAdmin()->id;
+        $listRequest['avatar'] = $destinationPath;
+        if (isset($listRequest['image'])) {
+            unset($listRequest['image']);
+        }
 
-        return redirect()->route('superadmin.home')->with('create_success', 'A new admin is created successfully');
+        if ($this->_repository->create($listRequest)) {
+            session()->forget('image');
+            return redirect()->route('superadmin.home')
+                ->with(getConfig('create.title'), getConfig('create.message'));
+        };
+
+        return false;
     }
 
     public function edit($id)
