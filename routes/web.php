@@ -41,6 +41,11 @@ Route::group(['prefix' => 'superadmin', 'middleware' => 'IsAdmin'], function () 
             'as'    => 'superadmin.delete.admin',
             'uses'  => 'Backend\SuperAdminController@destroy',
         ]);
+
+        Route::get('/js', [
+            'as' => 'superadmin.js',
+            'uses' => 'Backend\SuperAdminController@js'
+        ]);
     });
 
     Route::get('/logout', [

@@ -101,4 +101,15 @@ class SuperAdminController extends BaseController
 
         return back()->with('delete_success', "Deleted admin #$id successfully");
     }
+
+    public function js()
+    {
+        $listAdmins = $this->_repository->getListAdmins();
+
+        $viewDatas = [
+            'admins' => $listAdmins
+        ];
+
+        return view('backend.superadmin.admin.js')->with($viewDatas);
+    }
 }
