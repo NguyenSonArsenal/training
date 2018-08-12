@@ -32,8 +32,8 @@
 
                 <div class="form-group">
                     <label class="control-label">Email</label>
-                    <input type="email" class="form-control input_email"
-                           name="email" value="{{ old('email') }}"
+                    <input type="name" class="form-control input_email"
+                           name="name" value="{{ old('email') }}"
                            placeholder="Enter your email">
                     @if ($errors->has('email'))
                         <span class="txt_error_validate">{{ $errors->first('email') }}</span>
@@ -42,7 +42,7 @@
 
                 <div class="form-group">
                     <label class="control-label">Password</label>
-                    <input type="password" class="form-control input_password"
+                    <input type="text" class="form-control input_password"
                            name="password" value="{{ old('password') }}"
                            placeholder="Enter your password">
                     @if ($errors->has('password'))

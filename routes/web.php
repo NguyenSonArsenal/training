@@ -11,7 +11,7 @@ Route::post('admin/login', [
     'uses'  => 'Backend\Auth\AuthController@postLoginAdmin'
 ]);
 
-Route::group(['prefix' => 'superadmin', 'middleware' => 'IsAdmin'], function () {
+Route::group(['prefix' => 'superadmin'], function () {
     Route::get('/', [
         'as'    =>  'superadmin.home',
         'uses'  =>  'Backend\SuperAdminController@index'

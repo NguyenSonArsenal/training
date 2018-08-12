@@ -2,8 +2,7 @@
 namespace App\Http\Controllers\Backend\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Backend\AdminLoginRequest;
-use Auth;
+use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
@@ -12,23 +11,28 @@ class AuthController extends Controller
         return view('backend.login');
     }
 
-    public function postLoginAdmin(AdminLoginRequest $request)
+    // demo sql injection
+    public function postLoginAdmin(Request $request)
     {
-        $listRequest = $request->all();
+        // Connect to mysql
+        $conn = mysqli_connect('127.0.0.1','root','','training');
 
-        $requestLoginAdmin = [
-            'email'     => array_get($listRequest, 'email'),
-            'password'  => array_get($listRequest, 'password'),
-        ];
+        // Check connection
+        if (!$conn) {
+            die("Connection failed: " . $conn->connect_error);
+        }
 
-        if (backendGuard()->attempt($requestLoginAdmin)) {
-            $admin = backendGuard()->user();
-            if ($admin->isSuperAdmin()) {
-                return redirect()->route('superadmin.home');
-            }
-            if ($admin->isAdmin()) {
-                return redirect()->route('admin.home');
-            }
+        $name = $request->name;
+        $password = $request->password;
+
+        $sql = "SELECT * FROM admins where name = '$name' and password = '$password'";
+
+        $result = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+
+        if (mysqli_num_rows($result)) {
+            session()->put('name', $name);
+            return redirect()->route('superadmin.home');
         }
         return redirect()->route('admin.login.get')
             ->withInput()->withErrors(['admin_login_error' => 'Tài khoản không tồn tại']);
