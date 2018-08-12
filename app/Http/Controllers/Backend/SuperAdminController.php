@@ -31,7 +31,9 @@ class SuperAdminController extends BaseController
 
     public function create()
     {
-        return view('backend.superadmin.admin.create');
+        $srcImage = session()->has('hasTmpImage') ? session()->get('tmpImage.pathImgTmp')
+                                                       : 'assets/admin/images/default.png';
+        return view('backend.superadmin.admin.create', compact('srcImage'));
     }
 
     public function store(AdminCreateRequest $request)
@@ -39,7 +41,7 @@ class SuperAdminController extends BaseController
         $listRequest = $request->all();
         $destinationPath = doUpload();
         if ($destinationPath) {
-            deleteFileTmp(public_path(session()->get('image.pathImgTmp')));
+            deleteAllFileInForder(public_path(getConfig('tmp_upload_dir', 'tmp_uploads')));
         }
 
         $listRequest['ins_id'] = currentAdmin()->id;
@@ -49,7 +51,7 @@ class SuperAdminController extends BaseController
         }
 
         if ($this->_repository->create($listRequest)) {
-            session()->forget('image');
+            session()->forget('tmpImage');
             return redirect()->route('superadmin.home')
                 ->with(getConfig('create.title'), getConfig('create.message'));
         };
@@ -98,7 +100,6 @@ class SuperAdminController extends BaseController
     public function destroy($id)
     {
         Admin::where('id', $id)->delete();
-
         return back()->with('delete_success', "Deleted admin #$id successfully");
     }
 }

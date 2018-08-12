@@ -4,12 +4,14 @@ use Carbon\Carbon;
 if (!function_exists('doUploadToFoderTmp')) {
     function doUploadToFoderTmp($file)
     {
-        $fileName = $file->getClientOriginalName();
+        $fileName = strtotime(Carbon::now()) . '_' .  $file->getClientOriginalName();
         $pathImgTmp = getConfig('tmp_upload_dir', 'tmp_uploads' . DIRECTORY_SEPARATOR) . $fileName;
 
         if(Image::make($file)->save($pathImgTmp)) {
             $image = ['pathImgTmp' => $pathImgTmp, 'fileName' => $fileName];
-            return session()->put('image', $image);
+            session()->flash('hasTmpImage', true);
+            session()->put('tmpImage', $image);
+            return true;
         }
 
         return false;
@@ -71,12 +73,23 @@ if (!function_exists('validateSize')) {
 if (!function_exists('doUpload')) {
     function doUpload() {
         $uploadDir = createForderUpload();
-        $sourceImg = session()->get('image.pathImgTmp');
-        $destImg = rtrim($uploadDir, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . session()->get('image.fileName');
+        $sourceImg = session()->get('tmpImage.pathImgTmp');
+        $destImg = rtrim($uploadDir, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . session()->get('tmpImage.fileName');
         if (copy($sourceImg, $destImg)) {
             return $destImg;
         }
         return false;
+    }
+}
+
+if (!function_exists('deleteAllFileInForder')) {
+    function deleteAllFileInForder($nameForder)
+    {
+        $files = glob(ltrim($nameForder) . '/*'); // get all file names
+        foreach($files as $file){ // iterate files
+            if(is_file($file))
+                unlink($file); // delete file
+        }
     }
 }
 

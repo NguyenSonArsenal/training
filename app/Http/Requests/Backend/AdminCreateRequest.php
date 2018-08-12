@@ -15,14 +15,19 @@ class AdminCreateRequest extends FormRequest
     public function rules(Request $request)
     {
         $image = array_get($request->all(), 'image', null);
-        $rules = ['image' => 'bail|mimes:jpeg,png,jpg,gif|max:' . getConstant('MAX_IMAGE_UPLOAD')]; // max:10240 = max 10 MB
+        $rules = ['image' => 'bail|mimes:jpeg,png,jpg,gif|max:' . getConstant('MAX_IMAGE_UPLOAD')]; // max:10240 = 10MB
 
-        if ($image && validateImage('image')) {
-            if (session()->has('image.pathImgTmp')) {
-                $fileTmp = public_path(session()->get('image.pathImgTmp'));
-                deleteFileTmp($fileTmp);
+        if (empty($image)) {
+            if (session()->has('tmpImage')) {
+                session()->flash('hasTmpImage', true);
             }
-            doUploadToFoderTmp($image);
+        } else {
+            if (validateImage('image')) {
+                if (session()->has('tmpImage.pathImgTmp')) {
+                    deleteFileTmp(public_path(session()->get('tmpImage.pathImgTmp')));
+                }
+                doUploadToFoderTmp($image);
+            }
         }
 
         $rules += [

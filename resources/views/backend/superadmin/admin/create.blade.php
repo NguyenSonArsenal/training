@@ -1,7 +1,5 @@
 <?php
 $activeSidebar = 'admin_page';
-
-$srcImage = session()->has('image') ? session()->get('image.pathImgTmp') : 'assets/admin/images/default.png';
 ?>
 
 @extends('layouts.admin')
@@ -29,86 +27,86 @@ $srcImage = session()->has('image') ? session()->get('image.pathImgTmp') : 'asse
     </section>
 
     <section class="content">
-            <div class="box box-primary">
-                <form class="form form-horizontal tab-content" enctype="multipart/form-data"
-                      method="post" action="{{ route('superadmin.store.admin') }}">
+        <div class="box box-primary">
+            <form class="form form-horizontal tab-content" enctype="multipart/form-data"
+                  method="post" action="{{ route('superadmin.store.admin') }}">
 
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="form-item">
-                                <label for="" class="label_item">Name<small class="colorRed">(*)</small></label><br>
-                                <input class="input" type="text" name="name" value="{{ old('name') }}"><br>
-                                @if ($errors->has('name'))
-                                    <span class="show_error">{{ $errors->first('name') }}</span>
-                                @endif
-                            </div><br>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-item">
+                            <label for="" class="label_item">Name<small class="colorRed">(*)</small></label><br>
+                            <input class="input" type="text" name="name" value="{{ old('name') }}"><br>
+                            @if ($errors->has('name'))
+                                <span class="show_error">{{ $errors->first('name') }}</span>
+                            @endif
+                        </div><br>
 
-                            <div class="form-item">
-                                <label for="" class="label_item">Email<small class="colorRed">(*)</small></label><br>
-                                <input class="input" type="email" name="email" value="{{ old('email') }}"><br>
-                                @if ($errors->has('email'))
-                                    <span class="show_error">{{ $errors->first('email') }}</span>
-                                @endif
-                            </div><br>
+                        <div class="form-item">
+                            <label for="" class="label_item">Email<small class="colorRed">(*)</small></label><br>
+                            <input class="input" type="email" name="email" value="{{ old('email') }}"><br>
+                            @if ($errors->has('email'))
+                                <span class="show_error">{{ $errors->first('email') }}</span>
+                            @endif
+                        </div><br>
 
-                            <div class="form-item">
-                                <label for="" class="label_item">Password<small class="colorRed">(*)</small></label><br>
-                                <input class="input" type="password" name="password" value="{{ old('password') }}"><br>
-                                @if ($errors->has('password'))
-                                    <span class="show_error">{{ $errors->first('password') }}</span>
-                                @endif
-                            </div><br>
+                        <div class="form-item">
+                            <label for="" class="label_item">Password<small class="colorRed">(*)</small></label><br>
+                            <input class="input" type="password" name="password" value="{{ old('password') }}"><br>
+                            @if ($errors->has('password'))
+                                <span class="show_error">{{ $errors->first('password') }}</span>
+                            @endif
+                        </div><br>
 
-                            <div class="form-item">
-                                <label for="" class="label_item">Confirm Password<small class="colorRed">(*)</small></label><br>
-                                <input class="input" type="password" name="password_confirmation">
-                                @if ($errors->has('password_confirmation'))
-                                    <span class="show_error">{{ $errors->first('password_confirmation') }}</span>
-                                @endif
-                            </div><br>
+                        <div class="form-item">
+                            <label for="" class="label_item">Confirm Password<small class="colorRed">(*)</small></label><br>
+                            <input class="input" type="password" name="password_confirmation">
+                            @if ($errors->has('password_confirmation'))
+                                <span class="show_error">{{ $errors->first('password_confirmation') }}</span>
+                            @endif
+                        </div><br>
 
-                            <div class="form-item">
-                                <label for="" class="label_item">Role<small class="colorRed">(*)</small></label>
-                                <input type="radio" class="input_radio" name="role_type"
-                                       value={{ config('settings.role_type.admin.id') }} checked
-                                        {{ old('role_type') == config('settings.role_type.admin.id') ? "checked" : "" }}
-                                >
-                                Admin
-                                <input type="radio" class="input_radio" name="role_type"
-                                       value={{ config('settings.role_type.superadmin.id') }}
-                                        {{ old('role_type') == config('settings.role_type.superadmin.id') ? "checked" : "" }}
-                                >
-                                SuperAdmin
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-item">
-                                <label for="" class="label_item">Avatar</label>
-                                <input type="file" name="image" onchange="readURL(this);">
-                                @if ($errors->has('image'))
-                                    <span class="show_error" id="avatar_error">{{ $errors->first('image') }}</span>
-                                @endif
-                            </div>
-
-                            <img style="width: 200px; height: 200px; position:relative; border: 1px solid #ccc"
-                             src="{{ asset($srcImage) }}"  alt="name image" id="imgPreview" />
+                        <div class="form-item">
+                            <label for="" class="label_item">Role<small class="colorRed">(*)</small></label>
+                            <input type="radio" class="input_radio" name="role_type"
+                                   value={{ config('settings.role_type.admin.id') }} checked
+                                    {{ old('role_type') == config('settings.role_type.admin.id') ? "checked" : "" }}
+                            >
+                            Admin
+                            <input type="radio" class="input_radio" name="role_type"
+                                   value={{ config('settings.role_type.superadmin.id') }}
+                                    {{ old('role_type') == config('settings.role_type.superadmin.id') ? "checked" : "" }}
+                            >
+                            SuperAdmin
                         </div>
                     </div>
-                    
-                    <div class="box-footer">
-                        <button type="submit" class="button_save">
-                            <i class="fa fa-save" aria-hidden="true"></i>
-                            Save
-                        </button>
-                        <a href="" type="button" class="button_undo">
-                            <i class="fa fa-undo" aria-hidden="true"></i>
-                            Undo
-                        </a>
+                    <div class="col-sm-6">
+                        <div class="form-item">
+                            <label for="" class="label_item">Avatar</label>
+                            <input type="file" name="image" onchange="readURL(this);">
+                            @if ($errors->has('image'))
+                                <span class="show_error" id="avatar_error">{{ $errors->first('image') }}</span>
+                            @endif
+                        </div>
+
+                        <img style="width: 200px; height: 200px; position:relative; border: 1px solid #ccc"
+                         src="{{ asset($srcImage) }}"  alt="name image" id="imgPreview" />
                     </div>
-                </form>
-            </div>
+                </div>
+
+                <div class="box-footer">
+                    <button type="submit" class="button_save">
+                        <i class="fa fa-save" aria-hidden="true"></i>
+                        Save
+                    </button>
+                    <a href="" type="button" class="button_undo">
+                        <i class="fa fa-undo" aria-hidden="true"></i>
+                        Undo
+                    </a>
+                </div>
+            </form>
+        </div>
     </section>
 @endsection
 
