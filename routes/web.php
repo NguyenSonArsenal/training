@@ -5,6 +5,7 @@ Route::get('admin/login',[
     'uses'  => 'Backend\Auth\AuthController@showFormLogin'
 ]);
 
+// @todo mysql injection
 Route::post('admin/login', [
     'as'    =>  'admin.login.post',
     'uses'  => 'Backend\Auth\AuthController@postLoginAdmin'
