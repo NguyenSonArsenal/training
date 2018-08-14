@@ -1,0 +1,1 @@
+Hi, This email send from {{$name}} with message:{{$title}}. Good night !!!

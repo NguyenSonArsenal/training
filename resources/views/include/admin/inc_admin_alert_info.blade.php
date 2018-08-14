@@ -32,3 +32,10 @@
         <strong>{{ session('continue_create') }}</strong>
     </div>
 @endif
+
+@if (session('send_mail_success'))
+    <div class="alert alert-success fade in" style="margin-top: 20px; background: none">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <strong>{{ session('send_mail_success') }}</strong>
+    </div>
+@endif

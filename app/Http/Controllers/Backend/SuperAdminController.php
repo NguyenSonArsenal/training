@@ -7,6 +7,7 @@ use App\Http\Controllers\Base\BaseController;
 use App\Http\Requests\Backend\AdminCreateRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\AdminRepository;
+use Mail;
 
 class SuperAdminController extends BaseController
 {
@@ -101,5 +102,24 @@ class SuperAdminController extends BaseController
     {
         Admin::where('id', $id)->delete();
         return back()->with('delete_success', "Deleted admin #$id successfully");
+    }
+
+    public function sendMail()
+    {
+        $emailTos = ['vanson297.nguyen@gmail.com'];
+
+        $emaliCCs = ['luongthequanabc@gmail.com', 'vanhienhoang603@gmail.com', 'yeuemtenthai@gmail.com'];
+
+        $viewDatas = ['name' => 'NguyenSonArsenal', 'title' => 'I miss you so much'];
+
+        Mail::send('backend.superadmin.admin.mailfb', $viewDatas,
+            function ($message) use ($emailTos, $emaliCCs){
+                $message->from('sonnv.paraline@gmail.com', 'Admin_paraline');
+                $message->to($emailTos)->cc($emaliCCs)
+                    ->subject('This is title of mail');
+            }
+        );
+        session()->flash('send_mail_success_flag', true);
+        return redirect()->route('superadmin.home')->with('send_mail_success', "Mail send successfully");
     }
 }

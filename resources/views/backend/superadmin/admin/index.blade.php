@@ -20,6 +20,18 @@ if (count($admins) > 0)
             <i class="fa fa-plus" aria-hidden="true"></i>
             Add admin
         </a>
+        @if(!session()->has('send_mail_success_flag'))
+            <a type="button" class="button-redirect" href="{{ route('superadmin.sendMail') }}"
+               id="load" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Sending email">
+                <i class="fa fa-star" aria-hidden="true"></i>
+                Send mail
+            </a>
+        @else
+            <a type="button" class="button-redirect" href="{{ route('superadmin.sendMail') }}">
+                <i class="fa fa-star" aria-hidden="true"></i>
+                Send mail
+            </a>
+        @endif
         <div class="clearfix"></div>
         @include('include.admin.inc_admin_alert_info')
     </section>
@@ -145,6 +157,10 @@ if (count($admins) > 0)
 @section('script')
 <script>
     $(document).ready(function () {
+        $('#load').on('click', function() {
+            var $this = $(this);
+            $this.button('loading');
+        });
     });
 </script>
 @endsection

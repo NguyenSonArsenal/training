@@ -16,6 +16,8 @@ Route::group(['prefix' => 'superadmin', 'middleware' => 'IsAdmin'], function () 
         'uses'  =>  'Backend\SuperAdminController@index'
     ]);
 
+    Route::get('mail', ['as' => 'superadmin.sendMail', 'uses' => 'Backend\SuperAdminController@sendMail']);
+
     Route::prefix('admin')->group(function () {
         Route::get('/create', [
             'as'    =>  'superadmin.create.admin.get',
